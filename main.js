@@ -93,6 +93,6 @@ function findInvalidCards(ccNumbers){
 
 //findInvalidCards([valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, invalid3, invalid4, invalid5, mystery1, mystery2, mystery3, mystery4, mystery5]);
 
-console.log(invalid1);
-validateCred(invalid1);
-console.log(invalid1);
+console.log(invalid1); //logs original array.
+validateCred(invalid1); //messes it up for some reason. 
+console.log(invalid1); //logs the modified array. >:(
