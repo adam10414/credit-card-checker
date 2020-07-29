@@ -99,4 +99,10 @@ function findInvalidCards(ccNumbers){
 
 //findInvalidCards([valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, invalid3, invalid4, invalid5, mystery1, mystery2, mystery3, mystery4, mystery5]);
 
-console.log(findInvalidCards(invalid1));
+/*
+print(mystery1);
+print(mystery3);
+print(mystery4);
+console.log(findInvalidCards(batch));
+*/
+
