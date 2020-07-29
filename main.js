@@ -93,7 +93,7 @@ function findInvalidCards(ccNumbers){
         }
     }
 
-    return console.log(invalidNumbers);
+    return invalidNumbers;
 }
 
 
@@ -106,3 +106,55 @@ print(mystery4);
 console.log(findInvalidCards(batch));
 */
 
+
+//This function accepts a batch of CC numbers and will return wich companies these numbers belong to. 
+//Remember Adam, [0][0] = [top Element, index 0][lower element, index 0]
+//batch[0][2] = 3
+//This function should not return duplicate items in the array. 
+//Objective = this function should return an array of companies that have mailed out invalid CC numbers. 
+function findInvalidCardCompanies(ccNumbers){
+    let companies = [];
+
+    //Finds CC companies
+    for(i = 0; i < ccNumbers.length; i++){
+        switch(ccNumbers[i][0]){
+            case 3: //Amex
+            companies.push("Amex");
+            break;
+
+            case 4: //Visa
+            companies.push("Visa");
+            break;
+
+            case 5:
+            companies.push("Mastercard");
+            break;
+
+            case 6:
+            companies.push("Discover");
+            break;
+        }//closing switch
+
+    }//closing loop
+
+    //Finds duplicate entries and removes them
+    for(currentCompanyIndex = 0; currentCompanyIndex < companies.length; currentCompanyIndex ++){
+        //starting allCompanyIndex at 1 because if it compares index 0 to index 0 and so on, it will always get a match and delete the entire array.
+        for(allCompanyIndex = currentCompanyIndex + 1; allCompanyIndex < companies.length; allCompanyIndex ++){
+            if(companies[currentCompanyIndex] === companies[allCompanyIndex]){
+                companies.splice(allCompanyIndex, 1); //Using the all company index here, since this will always delete the latter dupe in the array.
+            }
+        }
+
+    }//closing dupe loop.
+
+    return companies;
+
+}//closing findInvalidCardCompanies
+
+//console.log(batch);
+let test = findInvalidCards(batch);
+//console.log(test.length);
+//console.log(test);
+
+console.log(findInvalidCardCompanies(test));
