@@ -29,7 +29,13 @@ const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, inval
 //Checks for valid credit card numbers. 
 //Returns true if valid and false if not. 
 //Uses the Luhn algorithm
-function validateCred(array){
+function validateCred(arraySample){
+
+    //Declaring a new working variable and cloning the arraySample so this function doesn't mutate the global variables. 
+    //Using spread syntax for this. 
+    //The reason behind this is because when arrays are referenced, the memory location is passed and not the actual values. 
+    //This results in locally scoped variables modifying global variables. 
+    let array = [...arraySample];
 
     //i = index. 
     //Starting index out at second to last digit in array, will iterate -2 every step and double the number. If this number > 9, then will -9 from result. 
@@ -93,6 +99,4 @@ function findInvalidCards(ccNumbers){
 
 //findInvalidCards([valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, invalid3, invalid4, invalid5, mystery1, mystery2, mystery3, mystery4, mystery5]);
 
-console.log(invalid1); //logs original array.
-validateCred(invalid1); //messes it up for some reason. 
-console.log(invalid1); //logs the modified array. >:(
+console.log(findInvalidCards(invalid1));
