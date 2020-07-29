@@ -4,7 +4,7 @@ const valid2 = [5, 5, 3, 5, 7, 6, 6, 7, 6, 8, 7, 5, 1, 4, 3, 9]
 const valid3 = [3, 7, 1, 6, 1, 2, 0, 1, 9, 9, 8, 5, 2, 3, 6]
 const valid4 = [6, 0, 1, 1, 1, 4, 4, 3, 4, 0, 6, 8, 2, 9, 0, 5]
 const valid5 = [4, 5, 3, 9, 4, 0, 4, 9, 6, 7, 8, 6, 9, 6, 6, 6]
-const valid6 = [4, 5, 3, 9, 6, 8, 9, 8, 8, 7, 7, 0, 5, 7, 9, 8]
+//const valid6 = [4, 5, 3, 9, 6, 8, 9, 8, 8, 7, 7, 0, 5, 7, 9, 8]
 
 // All invalid credit card numbers
 const invalid1 = [4, 5, 3, 2, 7, 7, 8, 7, 7, 1, 0, 9, 1, 7, 9, 5]
@@ -28,8 +28,14 @@ const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, inval
 
 //Checks for valid credit card numbers. 
 //Returns true if valid and false if not. 
-//Uses the Luhn algorithum
-function validateCred(array){
+//Uses the Luhn algorithm
+function validateCred(arraySample){
+
+    //Declaring a new working variable and cloning the arraySample so this function doesn't mutate the global variables. 
+    //Using spread syntax for this. 
+    //The reason behind this is because when arrays are referenced, the memory location is passed and not the actual values. 
+    //This results in locally scoped variables modifying global variables. 
+    let array = [...arraySample];
 
     //i = index. 
     //Starting index out at second to last digit in array, will iterate -2 every step and double the number. If this number > 9, then will -9 from result. 
@@ -47,7 +53,7 @@ function validateCred(array){
         arraySum = arraySum + array[i];
     }
 
-    //Does the sum return a remainder of 0 when devided by 100? 
+    //Does the sum return a remainder of 0 when devided by 10? 
     if(arraySum % 10 === 0){
         return true;
     }
@@ -66,15 +72,37 @@ function print(array){
     else return console.log('The array is not valid. :( ');
 }
 
+/*
+easier to log things to console this way. 
 print(mystery1);
 print(mystery2);
 print(mystery3);
 print(mystery4);
 print(mystery5);
 
-/*
-I will use this later to see if the function works. 
-console.log(`This should be valid and return TRUE: ${validateCred(valid1)}`);
-console.log(`This should be invalid and return FALSE: ${validateCred(invalid1)}`);
-
 */
+
+//Finds and returns invalid cc numbers. 
+//Input an array of cc numbers. (Nested arrays)
+function findInvalidCards(ccNumbers){
+
+    let invalidNumbers = [];
+    for(i = 0; i < ccNumbers.length; i++){
+        if(validateCred(ccNumbers[i])=== false){
+            invalidNumbers.push(ccNumbers[i]);
+        }
+    }
+
+    return console.log(invalidNumbers);
+}
+
+
+//findInvalidCards([valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, invalid3, invalid4, invalid5, mystery1, mystery2, mystery3, mystery4, mystery5]);
+
+/*
+print(mystery1);
+print(mystery3);
+print(mystery4);
+console.log(findInvalidCards(batch));
+*/
+
